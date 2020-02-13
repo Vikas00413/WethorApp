@@ -4,8 +4,12 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorTabIndicatorColor">#F13B2C</color>
+    <color name="colorBg">#F5f5f7</color>
+    <color name="colorFailure">#EB5869</color>
     <color name="colorTabTextSelected">#000000</color>
     <color name="colorBlack">#000000</color>
     <color name="colorTabText">#33000000</color>
+    <color name="colorButton">#4A4A4A</color>
+    <color name="colorCurrentTemp">#2A2A2A</color>
+    <color name="colorCityName">#556799</color>
 </resources>

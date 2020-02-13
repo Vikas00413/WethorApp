@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data class="TempDataBinding">
+
+
+        <variable
+            name="data"
+            type="com.demo.model.custom.Temprature" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorBg" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:text="@{data.date}"
+                android:textColor="@color/colorBlack"
+                 />
+
+            <TextView
+                android:id="@+id/tv_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:text="@{data.day}"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_max_min_tem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:text="@{data.max_min}"
+                android:textColor="@color/colorBlack" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

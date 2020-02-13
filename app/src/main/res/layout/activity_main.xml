@@ -1,49 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#b2b2b2"
-    android:orientation="vertical"
-    tools:context=".view.activity.MainActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditText
-        android:id="@+id/et_search"
+    <data>
+
+        <variable
+            name="data"
+            type="com.demo.model.custom.CurrentTemp" />
+
+        <variable
+            name="adapter"
+            type="com.demo.demotext.adapter.TemperatreAdapter" />
+    </data>
+
+
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="Search"
-        android:padding="10dp"
-        android:textColor="@color/colorBlack"
-        android:layout_margin="5dp"
-        android:background="@color/colorWhite" />
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        app:tabIndicatorColor="@color/colorTabIndicatorColor"
-        app:tabIndicatorHeight="3dp"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/colorTabTextSelected"
-        app:tabTextColor="@color/colorTabText">
+        android:layout_height="match_parent"
+        android:background="@color/colorBg"
+        android:orientation="vertical"
+        tools:context=".view.activity.MainActivity">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
+        <ImageView
+            android:id="@+id/iv_loader"
+            android:layout_width="@dimen/loader_size"
+            android:layout_height="@dimen/loader_size"
+            android:layout_centerInParent="true"
+            android:src="@drawable/loder_gif" />
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-    </com.google.android.material.tabs.TabLayout>
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp" />
+        <RelativeLayout
+            android:id="@+id/rl_failure"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorFailure"
+            android:visibility="gone">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/tv_failure_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="sans-serif"
+                android:gravity="center_horizontal"
+                android:text="@string/fail_msg"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/fail_text_size" />
+
+            <Button
+                android:id="@+id/btn_retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_failure_msg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/btr_retry_margin_top"
+                android:background="@color/colorButton"
+                android:text="@string/retry"
+                android:textColor="@color/colorWhite" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/rl_success"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/colorBg">
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:text="@{data.date}"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_cur_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/temp_margin_top"
+                    android:fontFamily="sans-serif"
+                    android:text="@{data.temp}"
+                    android:textColor="@color/colorCurrentTemp"
+                    android:textSize="@dimen/cuttent_temp_size" />
+
+                <TextView
+                    android:id="@+id/text_max_min_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_cur_temp"
+                    android:layout_marginLeft="@dimen/max_min_temp_margin_left"
+                    android:layout_toRightOf="@+id/tv_cur_temp"
+                    android:text="@{data.max_min}"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/normal_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_city_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_cur_temp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="62dp"
+                    android:text="@{data.city}"
+                    android:textColor="@color/colorCityName"
+                    android:textSize="@dimen/city_text_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:visibility="gone">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_hot"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:adapter="@{adapter}"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:listitem="@layout/layout_row_temp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

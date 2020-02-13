@@ -14,7 +14,7 @@ android {
         multiDexEnabled true
         versionCode 1
         versionName "1.0"
-        buildConfigField 'String', 'BASE_URL', '"https://www.reddit.com/"'
+        buildConfigField 'String', 'BASE_URL', '"http://api.openweathermap.org/data/2.5/"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

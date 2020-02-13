@@ -4,7 +4,7 @@ data class ForcastWethorResponse(
     var city: City?,
     var cnt: Int?,
     var cod: String?,
-    var list: List<X?>?,
+    var list: List<Weth>?,
     var message: Int?
 )
 
@@ -24,9 +24,9 @@ data class Coord(
     var lon: Double?
 )
 //http://api.openweathermap.org/data/2.5/weather?q=Noida&APPID=e39a45e7c5961f0f6573c0774f4f1732&units=metric
-data class X(
+data class Weth(
     var clouds: Clouds?,
-    var dt: Int?,
+    var dt: Long?,
     var dt_txt: String?,
     var main: Main?,
     var sys: Sys?,
@@ -45,7 +45,6 @@ data class Main(
     var pressure: Int?,
     var sea_level: Int?,
     var temp: Double?,
-    var temp_kf: Int?,
     var temp_max: Double?,
     var temp_min: Double?
 )

@@ -1,9 +1,12 @@
 package com.demo.demotext.repository
 
 import android.util.Log
+import com.appstreet.assignment.util.Constant
 
 import com.demo.demotext.util.NoInternetException
-import com.demo.model.response.RedditMainResponseData
+import com.demo.model.response.CurrentTemperatureResponseData
+import com.demo.model.response.ForcastWethorResponseData
+
 
 import java.net.SocketTimeoutException
 
@@ -16,15 +19,19 @@ import javax.inject.Singleton
 @Singleton
 object GitHubRepository : BaseRepository() {
 
+
     /**
-     * This is suspend function is use for Hot Data
+     * This is suspend function is use for get current weather
      */
     @Throws(NoInternetException::class, SocketTimeoutException::class)
-    suspend fun getHotData(): RedditMainResponseData {
-        var fetchdata = RedditMainResponseData()
+    suspend fun getCurrentWeather(city: String): CurrentTemperatureResponseData {
+        var fetchdata = CurrentTemperatureResponseData()
         try {
             fetchdata.data = safeApiCall(
-                { mGitHubApiInterface.getHotData().await() },
+                {
+                    mGitHubApiInterface.getCurrentWethor(city, Constant.APP_ID, Constant.UNIT)
+                        .await()
+                },
                 "Data Not Found"
             )
             return fetchdata
@@ -39,14 +46,17 @@ object GitHubRepository : BaseRepository() {
     }
 
     /**
-     * This is suspend function is use for Hot Data
+     * This is suspend function is use for get current weather
      */
     @Throws(NoInternetException::class, SocketTimeoutException::class)
-    suspend fun getNewData(): RedditMainResponseData {
-        var fetchdata = RedditMainResponseData()
+    suspend fun getForcastedWeather(city: String): ForcastWethorResponseData {
+        var fetchdata = ForcastWethorResponseData()
         try {
             fetchdata.data = safeApiCall(
-                { mGitHubApiInterface.getNewData().await() },
+                {
+                    mGitHubApiInterface.getForcastedWether(city, Constant.APP_ID, Constant.METRIC)
+                        .await()
+                },
                 "Data Not Found"
             )
             return fetchdata
@@ -59,6 +69,5 @@ object GitHubRepository : BaseRepository() {
 
         }
     }
-
 
 }

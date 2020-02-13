@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="loader_size">96dp</dimen>
+    <dimen name="fail_text_size">54sp</dimen>
+    <dimen name="temp_margin_top">56dp</dimen>
+    <dimen name="btr_retry_margin_top">44sp</dimen>
+    <dimen name="cuttent_temp_size">96sp</dimen>
+    <dimen name="normal_text_size">16sp</dimen>
+    <dimen name="max_min_temp_margin_left">5sp</dimen>
+    <dimen name="ten_dp">10sp</dimen>
+    <dimen name="city_text_size">36sp</dimen>
+
+</resources>
