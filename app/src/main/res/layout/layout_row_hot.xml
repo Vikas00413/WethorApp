@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data class="HotDataBinding">
+
+
+        <variable
+            name="data"
+            type="com.demo.model.response.Children" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_kind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.kind}"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:id="@+id/tv_subeddit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_kind"
+                android:text="@{`Sub Eddit `+data.data.subreddit}"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:id="@+id/tv_selftext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_subeddit"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@{`Self Text `+data.data.selftext}" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
