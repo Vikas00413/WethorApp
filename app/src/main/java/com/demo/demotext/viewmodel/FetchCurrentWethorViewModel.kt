@@ -7,24 +7,29 @@ import com.appstreet.assignment.util.Coroutines
 import com.bookmylibrary.librarian.viewmodel.ErrorModel
 import com.demo.demotext.util.NoInternetException
 import com.demo.demotext.util.SingleLiveEvent
+import com.demo.model.custom.CurrentTemp
 import com.demo.model.response.CurrentTemperatureResponse
 import java.net.SocketTimeoutException
+import java.net.UnknownHostException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.roundToInt
 
 class FetchCurrentWethorViewModel : BaseAndroidViewModel {
     var app: Application? = null
     val toastMessage = SingleLiveEvent<String>()
-    var response: SingleLiveEvent<DataWrapper<CurrentTemperatureResponse>>? = null
+    var response: SingleLiveEvent<DataWrapper<CurrentTemp>>? = null
     fun showToastMessage(msg: String) {
         toastMessage.value = msg
     }
 
-    fun handelAction(data: DataWrapper<CurrentTemperatureResponse>) {
+    fun handelAction(data: DataWrapper<CurrentTemp>) {
         response!!.value = data
     }
 
 
-    fun getCurrentWeather(city:String) {
-        var data = DataWrapper<CurrentTemperatureResponse>(null, null, true)
+    fun getCurrentWeather(lat:Double,lng:Double) {
+        var data = DataWrapper<CurrentTemp>(null, null, true)
         handelAction(data)
 //        val jsonConverter = JSONConverter<LibraryData>()
 //        var jsonObj = jsonConverter.objectToJson(libraryData)
@@ -33,24 +38,27 @@ class FetchCurrentWethorViewModel : BaseAndroidViewModel {
 
         Coroutines.main {
             try {
-                val authResponse = repositires!!.getCurrentWeather(city)
+                val authResponse = repositires!!.getCurrentWeather(lat,lng)
                 authResponse?.let {
                     AppUtil.showLogMessage("e", "response==", it.data.toString())
-                    response!!.value = DataWrapper(it.data, null, false)
+                    var currenTemprature:CurrentTemp =performTaskHandelData(it.data)
+
+                    response!!.value = DataWrapper(currenTemprature, null, false)
 
                 }
-            } catch (e: NoInternetException) {
-                var data = DataWrapper<CurrentTemperatureResponse>(
+            }
+           catch (e: NoInternetException) {
+                var data = DataWrapper<CurrentTemp>(
                     null,
                     ErrorModel(true, Constant.NET_ERROR),
-                    true
+                    false
                 )
                 handelAction(data)
             } catch (e: SocketTimeoutException) {
-                var data = DataWrapper<CurrentTemperatureResponse>(
+                var data = DataWrapper<CurrentTemp>(
                     null,
                     ErrorModel(true, Constant.SLOW_NET_ERROR),
-                    true
+                    false
                 )
                 handelAction(data)
 
@@ -59,11 +67,34 @@ class FetchCurrentWethorViewModel : BaseAndroidViewModel {
         }
     }
 
+    private fun performTaskHandelData(response: CurrentTemperatureResponse?): CurrentTemp {
+        var currentTemp : CurrentTemp?=null
+        response?.let {
+            var main = response.main
+            var city=""
+            response.name?.let {
+                city=it
+            }
+            main?.let {
+                var temp = "${it.temp!!.roundToInt()}°C"
+                var max_min =
+                    "${it.temp_max!!.roundToInt()}°C/ ${it.temp_min!!.roundToInt()}°C"
 
-     constructor(application: Application) : super(application) {
+                val date =
+                    SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
+                        .format(Date())
+                 currentTemp = CurrentTemp(temp, city, max_min, date)
+
+            }
+        }
+        return currentTemp!!
+    }
+
+
+    constructor(application: Application) : super(application) {
         app = application
         if (response == null)
-            response = SingleLiveEvent<DataWrapper<CurrentTemperatureResponse>>()
+            response = SingleLiveEvent<DataWrapper<CurrentTemp>>()
 
     }
 

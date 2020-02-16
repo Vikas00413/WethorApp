@@ -2,4 +2,5 @@
     <string name="app_name">DemoText</string>
     <string name="fail_msg">Something went wrong at our end!</string>
     <string name="retry">Retry</string>
+    <string name="errMsgNoLocation">No location found please try again.</string>
 </resources>

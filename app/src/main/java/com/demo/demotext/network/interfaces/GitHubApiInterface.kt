@@ -29,12 +29,12 @@ interface GitHubApiInterface {
 
     @GET("weather?")
     fun getCurrentWethor(
-        @Query("q") q: String, @Query("APPID") APPID: String ,@Query("units") units: String
+        @Query("lat") lat: Double,@Query("lon") lon: Double, @Query("APPID") APPID: String ,@Query("units") units: String
     ): Deferred<Response<CurrentTemperatureResponse>>
 
     @GET("forecast?")
     fun getForcastedWether(
-        @Query("q") q: String, @Query("APPID") APPID: String ,@Query("Metric") Metric: String
+        @Query("lat") lat: Double,@Query("lon") lon: Double, @Query("APPID") APPID: String ,@Query("units") units: String
     ): Deferred<Response<ForcastWethorResponse>>
 
 }

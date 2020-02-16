@@ -40,8 +40,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:fontFamily="sans-serif"
+                android:fontFamily="sans-serif-thin"
                 android:gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:layout_marginRight="@dimen/ten_dp"
                 android:text="@string/fail_msg"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/fail_text_size" />
@@ -79,7 +81,7 @@
                     android:layout_marginTop="@dimen/ten_dp"
                     android:text="@{data.date}"
                     android:textColor="@color/colorBlack"
-                    android:textStyle="bold" />
+                     />
 
                 <TextView
                     android:id="@+id/tv_cur_temp"
@@ -87,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/temp_margin_top"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="sans-serif-black"
                     android:text="@{data.temp}"
                     android:textColor="@color/colorCurrentTemp"
                     android:textSize="@dimen/cuttent_temp_size" />
@@ -112,6 +114,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="62dp"
                     android:text="@{data.city}"
+                    android:fontFamily="sans-serif-thin"
                     android:textColor="@color/colorCityName"
                     android:textSize="@dimen/city_text_size" />
             </RelativeLayout>

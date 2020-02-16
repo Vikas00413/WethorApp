@@ -1,8 +1,11 @@
 package com.demo.demotext.di.modules
 
 import android.util.Log
+import com.appstreet.assignment.util.Constant
 
 import com.demo.demotext.MyApplication
+import com.demo.demotext.util.NoInternetException
+import com.demo.demotext.util.PermissionUtil
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -74,10 +77,12 @@ class NetModule(var mBaseUrl: String) {
         cache: Cache,
         @Named("Offline") offlineInterceptor: Interceptor,
         @Named("Online") networkInterceptor: Interceptor,
+        @Named("noInternet") noInternetInterceptor: Interceptor,
         httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .cache(cache)
+            .addInterceptor(noInternetInterceptor)
             .addInterceptor(httpLoggingInterceptor) // used if network off OR on
             .addNetworkInterceptor(networkInterceptor) // only used when network is on
             .addInterceptor(offlineInterceptor)
@@ -159,7 +164,7 @@ class NetModule(var mBaseUrl: String) {
             // prevent caching when network is on. For that we use the "networkInterceptor"
             if (!MyApplication.hasNetwork()) {
                 val cacheControl = CacheControl.Builder()
-                   /* .maxStale(7, TimeUnit.DAYS)*/
+                    .maxStale(7, TimeUnit.DAYS)
                     .build()
 
                 request = request.newBuilder()
@@ -173,6 +178,41 @@ class NetModule(var mBaseUrl: String) {
         }
     }
 
+
+    /**
+     * This interceptor will be called both if the network is available and if the network is not available
+     * @return
+     */
+    @Provides
+    @Named("noInternet")
+    @Singleton
+    fun provideNoInterNetInterceptor(): Interceptor {
+        return Interceptor { chain ->
+            Log.d(TAG, "offline interceptor: called.")
+            var request = chain.request()
+
+            // prevent caching when network is on. For that we use the "networkInterceptor"
+            if (!MyApplication.hasNetwork()) {
+                 throw NoInternetException(Constant.NET_ERROR)
+
+
+
+            }
+            request = request.newBuilder()
+
+                .build()
+            chain.proceed(request)
+        }
+    }
+
+
+
+    @Provides
+    @Singleton
+    fun providePermissionUtil():PermissionUtil{
+
+        return PermissionUtil
+    }
 
 
 }

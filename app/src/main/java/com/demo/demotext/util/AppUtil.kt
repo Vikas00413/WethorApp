@@ -1,5 +1,11 @@
+import android.content.DialogInterface
+import android.content.Intent
+import android.provider.Settings
+import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.demo.demotext.R
 
@@ -33,6 +39,30 @@ class AppUtil {
                         Log.e(messageTag, message)
                     }
                 }
+        }
+        fun showSettingsAlert(activity: AppCompatActivity, message: String) {
+
+            val alertDialog = AlertDialog.Builder(activity)
+            alertDialog.setTitle("Alert")
+
+            alertDialog.setMessage(message)
+            // On pressing Settings button
+            alertDialog.setPositiveButton("Yes", object : DialogInterface.OnClickListener {
+                public override fun onClick(dialog: DialogInterface, which: Int) {
+                    val intent = Intent(
+                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        Uri.fromParts("package", activity.getPackageName(), null)
+                    )
+                    activity.startActivityForResult(intent, 1)
+                }
+            })
+            // on pressing cancel button
+            alertDialog.setNegativeButton("Cancel", object : DialogInterface.OnClickListener {
+                public override fun onClick(dialog: DialogInterface, which: Int) {
+                    dialog.cancel()
+                }
+            })
+            alertDialog.show()
         }
 
         fun playGif(imageView: ImageView) {

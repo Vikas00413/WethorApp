@@ -24,12 +24,12 @@ object GitHubRepository : BaseRepository() {
      * This is suspend function is use for get current weather
      */
     @Throws(NoInternetException::class, SocketTimeoutException::class)
-    suspend fun getCurrentWeather(city: String): CurrentTemperatureResponseData {
+    suspend fun getCurrentWeather(lat:Double,lng:Double): CurrentTemperatureResponseData {
         var fetchdata = CurrentTemperatureResponseData()
         try {
             fetchdata.data = safeApiCall(
                 {
-                    mGitHubApiInterface.getCurrentWethor(city, Constant.APP_ID, Constant.UNIT)
+                    mGitHubApiInterface.getCurrentWethor(lat,lng, Constant.APP_ID, Constant.UNIT)
                         .await()
                 },
                 "Data Not Found"
@@ -49,12 +49,12 @@ object GitHubRepository : BaseRepository() {
      * This is suspend function is use for get current weather
      */
     @Throws(NoInternetException::class, SocketTimeoutException::class)
-    suspend fun getForcastedWeather(city: String): ForcastWethorResponseData {
+    suspend fun getForcastedWeather(lat: Double,lng: Double): ForcastWethorResponseData {
         var fetchdata = ForcastWethorResponseData()
         try {
             fetchdata.data = safeApiCall(
                 {
-                    mGitHubApiInterface.getForcastedWether(city, Constant.APP_ID, Constant.METRIC)
+                    mGitHubApiInterface.getForcastedWether(lat,lng, Constant.APP_ID, Constant.UNIT)
                         .await()
                 },
                 "Data Not Found"
