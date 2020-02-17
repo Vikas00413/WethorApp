@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.demo.demotext.MyApplication
 
+/**
+ * This is BaseActivity class for all activity having most common method for all child activity
+ */
 
 abstract class BaseActivity : AppCompatActivity() {
 

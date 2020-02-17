@@ -3,7 +3,7 @@ package com.rebeledutech.taktiiteacherregistration.util
 import com.google.gson.Gson
 
 /**
- * Created by vikas on 11/25/2015.
+ * Created by vikas on 17/02/2020.
  */
 class JSONConverter<T> {
 

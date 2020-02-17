@@ -17,6 +17,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
+/**
+ * This is viewmodel class for getting future weather
+ */
 class FetchFarCastedWethorViewModel : BaseAndroidViewModel {
     var app: Application? = null
     val toastMessage = SingleLiveEvent<String>()

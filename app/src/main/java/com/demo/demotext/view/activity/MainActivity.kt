@@ -36,7 +36,9 @@ import com.demo.demotext.MyApplication
 import com.demo.demotext.util.PermissionUtil
 import javax.inject.Inject
 
-
+/**
+ * this is main activity where current and future weather is displyed
+ */
 class MainActivity : AppCompatActivity(), View.OnClickListener, LocationListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModelCurrent: FetchCurrentWethorViewModel

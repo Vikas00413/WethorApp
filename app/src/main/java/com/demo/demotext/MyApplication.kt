@@ -60,10 +60,10 @@ class MyApplication : Application() {
     }
 
     fun getNetComponent(): NetComponent {
-        return mNetComponent!!
+        return mNetComponent
     }
 
     fun getGitHubComponent(): GitHubComponent {
-        return mGitHubComponent!!
+        return mGitHubComponent
     }
 }

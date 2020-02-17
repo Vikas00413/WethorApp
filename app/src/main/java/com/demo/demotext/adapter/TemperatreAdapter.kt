@@ -10,6 +10,10 @@ import com.demo.demotext.R
 import com.demo.demotext.databinding.TempDataBinding
 import com.demo.model.custom.Temprature
 
+/**
+ * Here is adapter class show all next 5 day temprature list
+ */
+
 class TemperatreAdapter (
     var context: Context
 ) :

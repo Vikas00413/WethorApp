@@ -1,5 +1,8 @@
 package com.demo.model.response
 
+/**
+ * This is class use for showing Future Weather Response
+ */
 data class ForcastWethorResponse(
     var city: City?,
     var cnt: Int?,
@@ -23,7 +26,7 @@ data class Coord(
     var lat: Double?,
     var lon: Double?
 )
-//http://api.openweathermap.org/data/2.5/weather?q=Noida&APPID=e39a45e7c5961f0f6573c0774f4f1732&units=metric
+
 data class Weth(
     var clouds: Clouds?,
     var dt: Long?,

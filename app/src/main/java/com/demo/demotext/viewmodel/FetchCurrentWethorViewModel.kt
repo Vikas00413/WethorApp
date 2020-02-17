@@ -15,6 +15,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
+
+/**
+ * This is viewmodel class for getting current weather
+ */
+
 class FetchCurrentWethorViewModel : BaseAndroidViewModel {
     var app: Application? = null
     val toastMessage = SingleLiveEvent<String>()
